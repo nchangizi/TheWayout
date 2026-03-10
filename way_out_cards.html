@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Way Out – Book Summary</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #eef0f5; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 24px 16px; }
+
+  h1 { font-size: 1.2rem; color: #4a5568; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; font-weight: 600; }
+  .book-label { font-size: 0.8rem; color: #718096; margin-bottom: 20px; font-style: italic; }
+
+  .nav { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 780px; margin-bottom: 28px; }
+  .nav-btn { padding: 6px 14px; border-radius: 20px; border: 2px solid transparent; background: white; color: #4a5568; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .nav-btn:hover { border-color: #6b82a8; }
+  .nav-btn.active { background: #6b82a8; color: white; border-color: #6b82a8; }
+
+  .card { background: white; border-radius: 20px; max-width: 720px; width: 100%; box-shadow: 0 4px 24px rgba(0,0,0,0.08); overflow: hidden; }
+
+  .card-header { padding: 28px 32px 20px; border-bottom: 1px solid #eef0f5; }
+  .topic-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; opacity: 0.6; color: #4a5568; }
+  .card-title { font-size: 1.9rem; font-weight: 700; color: #1a202c; }
+  .card-subtitle { margin-top: 8px; font-size: 0.95rem; color: #718096; line-height: 1.5; }
+
+  .card-body { padding: 24px 32px 32px; display: flex; flex-direction: column; gap: 20px; }
+
+  .section { border-radius: 12px; padding: 18px 20px; }
+  .section-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; opacity: 0.65; }
+  .section ul { padding-left: 16px; }
+  .section li { font-size: 0.9rem; line-height: 1.65; color: #2d3748; margin-bottom: 4px; }
+
+  .sec-concept { background: #f7f8ff; }
+  .sec-concept .section-title { color: #4a5568; }
+
+  .sec-reframe { background: #f0f7f4; }
+  .sec-reframe .section-title { color: #2e7d5e; }
+  .reframe-item { background: white; border-left: 3px solid #4caf85; border-radius: 6px; padding: 8px 12px; margin-bottom: 8px; font-size: 0.88rem; line-height: 1.5; color: #2d3748; }
+  .reframe-item .old { color: #999; text-decoration: line-through; font-size: 0.82rem; margin-bottom: 2px; }
+  .reframe-item .new { color: #2e7d5e; font-weight: 600; }
+
+  .sec-strategy { background: #f4f0f9; }
+  .sec-strategy .section-title { color: #6a3ea1; }
+  .strategy-chip { display: inline-block; background: #ede8f7; color: #6a3ea1; border-radius: 20px; padding: 4px 12px; font-size: 0.82rem; font-weight: 600; margin: 3px 3px 3px 0; }
+
+  .sec-writing { background: #fff8e6; }
+  .sec-writing .section-title { color: #b07800; }
+  .prompt { background: white; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; font-size: 0.88rem; line-height: 1.5; color: #2d3748; border: 1px solid #f0d98a; }
+  .prompt::before { content: "✏️  "; }
+
+  .sec-evidence { background: #fff5f5; }
+  .sec-evidence .section-title { color: #c0392b; }
+  .evidence-item { background: white; border-left: 3px solid #e57373; border-radius: 6px; padding: 8px 12px; margin-bottom: 8px; font-size: 0.88rem; line-height: 1.5; color: #2d3748; }
+
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li { padding-left: 22px; position: relative; font-size: 0.9rem; line-height: 1.65; color: #2d3748; margin-bottom: 4px; }
+  .checklist li::before { content: "✓"; position: absolute; left: 0; color: #4caf85; font-weight: 700; }
+
+  .card-footer { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; border-top: 1px solid #eef0f5; }
+  .arrow-btn { background: none; border: 2px solid #cbd5e0; border-radius: 50%; width: 40px; height: 40px; font-size: 1.1rem; cursor: pointer; color: #4a5568; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+  .arrow-btn:hover { background: #6b82a8; border-color: #6b82a8; color: white; }
+  .arrow-btn:disabled { opacity: 0.25; cursor: default; }
+  .counter { font-size: 0.85rem; color: #a0aec0; font-weight: 600; }
+
+  .accent-0  { border-top: 5px solid #5b8dee; }
+  .accent-1  { border-top: 5px solid #e05a7a; }
+  .accent-2  { border-top: 5px solid #4caf85; }
+  .accent-3  { border-top: 5px solid #f0b429; }
+  .accent-4  { border-top: 5px solid #9b59b6; }
+  .accent-5  { border-top: 5px solid #e07b54; }
+  .accent-6  { border-top: 5px solid #1abc9c; }
+  .accent-7  { border-top: 5px solid #c0392b; }
+  .accent-8  { border-top: 5px solid #2980b9; }
+</style>
+</head>
+<body>
+
+<h1>The Way Out</h1>
+<p class="book-label">Alan Gordon — Pain Reprocessing Therapy</p>
+<div class="nav" id="nav"></div>
+<div class="card" id="card"></div>
+
+<script>
+const topics = [
+  {
+    title: "Neuroplastic Pain",
+    subtitle: "Pain is real — but in neuroplastic pain, the brain is misreading safe signals as dangerous. Your body is fine.",
+    concepts: [
+      "Pain is a danger signal designed to be unignorable — like a fire alarm.",
+      "How we react to the alarm determines whether it stays on or switches off.",
+      "Pain is a conversation between brain and body — sometimes there are misunderstandings.",
+      "Neuroplastic pain: the brain misinterprets normal body messages as dangerous. It's a false alarm.",
+      "The pain processing parts of the brain are not perfect — they can make mistakes.",
+      "The brain can unintentionally learn how to be in pain.",
+      "In chronic pain, the brain changes in ways that reinforce and perpetuate the pain — it's learned too well.",
+      "When pain becomes chronic, it shifts to parts of the brain associated with learning and memory.",
+      "If you have chronic pain, your brain has become skilled at experiencing negative feelings in the body."
+    ],
+    reframes: [
+      { old: "My pain means my body is damaged.", new: "My brain is making a mistake — my body is fine. This is a false alarm." },
+      { old: "The pain has been going on so long, it must be structural.", new: "Chronic pain shifts into memory and learning centres — it's learned, and it can be unlearned." }
+    ],
+    strategies: ["Accept that the pain is real but the cause is the brain, not the body", "Stop searching for structural explanations", "Embrace the belief: my body is fine", "Understand this is a false alarm — not a sign of damage"],
+    prompts: [
+      "How does it feel to consider that your body might actually be fine — and the pain is a brain misinterpretation?",
+      "What would change about your daily life if you truly believed your body was safe?"
+    ]
+  },
+  {
+    title: "Fear & The Pain Cycle",
+    subtitle: "Fear is the fuel for neuroplastic pain. Pain and fear lock into a feedback loop — breaking the fear breaks the cycle.",
+    concepts: [
+      "Fear puts the brain in high danger mode → amplifies danger signals like pain.",
+      "When the brain is on high alert, it becomes more sensitive to pain.",
+      "Fear of the pain itself keeps neuroplastic pain alive — it reinforces the belief that the pain is dangerous.",
+      "Pain is like an impressionable toddler — it responds to the fear you show it.",
+      "Fear and pain can lock into a chronic feedback loop.",
+      "The more afraid of pain you are, the more likely it is to get stuck.",
+      "Even joyous occasions can trigger high alert if they create pressure or stakes.",
+      "Thoughts that trigger high alert: worrying, self-criticism, putting pressure on yourself.",
+      "Self-criticism activates the brain's threat system — a direct trigger for fear and pain."
+    ],
+    reframes: [
+      { old: "I'm scared of this pain — it must be serious.", new: "My fear is the fuel. When I respond without fear, I deactivate the alarm." },
+      { old: "This pain means danger.", new: "My brain is on high alert. The pain is real, but the danger is not." },
+      { old: "I need to eliminate this pain urgently.", new: "The harder I try to get rid of pain, the more I tell my brain it's dangerous." }
+    ],
+    strategies: ["Respond to pain without fear", "Reduce self-criticism and pressure", "Interrupt catastrophic thinking", "Cultivate safety signals throughout the day", "When in pain: 'This is temporary. I am safe. My body is fine.'"],
+    prompts: [
+      "What fearful thoughts do you have about your pain? How do those thoughts affect how the pain feels?",
+      "What would it mean to experience pain without fear — even for one minute?"
+    ]
+  },
+  {
+    title: "Somatic Tracking",
+    subtitle: "Somatic tracking is paying attention to pain with mindfulness, safety, and curiosity — not fear.",
+    concepts: [
+      "Somatic tracking has three components: mindfulness, safety reappraisal, and a playful/curious mood.",
+      "Mindfulness: observing pain without fear or judgement — this deactivates the brain's fear circuits.",
+      "Safety reappraisal: actively sending messages of safety to the brain about the sensations.",
+      "Paying attention with lightness and curiosity is essential — not grim determination.",
+      "The right mindset: turn down intensity, and be outcome independent (doing matters more than the result).",
+      "The harder you try to get rid of pain, the more you reinforce that it's dangerous.",
+      "By being outcome independent, you teach your brain the pain is safe — and it will eventually fade."
+    ],
+    reframes: [
+      { old: "I need to make this pain go away.", new: "I'm not trying to fix anything. I'm just observing with curiosity. The doing is enough." },
+      { old: "I'm paying attention to my pain to monitor it.", new: "I'm paying attention to my pain safely — to show my brain there's nothing to fear." }
+    ],
+    strategies: ["Observe pain with gentle curiosity, not fear", "Remind yourself: 'These sensations are safe'", "Stay outcome independent — release the need for a result", "Turn down intensity — approach with lightness", "Use safety reappraisal phrases during tracking"],
+    prompts: [
+      "Can you sit with a painful sensation for 60 seconds and observe it as just a sensation — not a threat?",
+      "What does 'outcome independence' mean to you personally? Where else in life do you put pressure on results?"
+    ]
+  },
+  {
+    title: "Corrective Experiences",
+    subtitle: "Each moment you experience pain without fear is a corrective experience — it teaches the brain that the sensations are safe.",
+    concepts: [
+      "A corrective experience: confronting what you fear in a way that makes you feel safe.",
+      "If exposure triggers feelings of danger, it reinforces fear — a setback.",
+      "The goal of Pain Reprocessing Therapy: maximise corrective experiences, minimise setbacks.",
+      "Setbacks cannot be eliminated — they are part of the process.",
+      "When pain is high, the brain is in danger mode → almost impossible to have a corrective experience.",
+      "When pain is high: use avoidance behaviours to feel more comfortable — don't push through.",
+      "Fighting pain puts the brain on high alert and reinforces that pain is dangerous.",
+      "Extinction burst: no behaviour gives up without a fight — expect spikes during recovery.",
+      "Each corrective experience teaches the brain that sensations are actually safe."
+    ],
+    reframes: [
+      { old: "I need to push through this pain.", new: "Pushing through reinforces danger. I can reduce the pain first, then have a corrective experience." },
+      { old: "A pain flare means I'm failing.", new: "This could be an extinction burst. No behaviour gives up without a fight." },
+      { old: "I'm back to square one.", new: "I can look at this pain as an opportunity to rewire my brain." }
+    ],
+    strategies: ["Maximise corrective (safe) experiences", "When pain is high — use avoidance to self-soothe, then re-approach", "Don't fight pain — reduce danger signals first", "Expect and accept extinction bursts", "Reframe flares as rewiring opportunities"],
+    phrases: ["This is temporary. I am going to be ok.", "I am safe and my body is fine.", "My brain thinks I am in danger — but it's just a false alarm."],
+    prompts: [
+      "Think of a recent moment when you experienced pain without spiralling into fear. What made that possible?",
+      "What avoidance behaviours help you feel safe? Can you use them intentionally rather than shamefully?"
+    ]
+  },
+  {
+    title: "High Alert & Danger Signals",
+    subtitle: "Being on high alert amplifies all danger signals — including pain. Cultivating safety turns the volume down.",
+    concepts: [
+      "High alert changes how the brain perceives signals from the body — fear can literally create pain.",
+      "Excessive fear is a burden that makes pain worse and life harder.",
+      "High alert behaviours: overuse of technology, struggling with uncertainty, feeling trapped.",
+      "Feeling trapped by symptoms creates frustration → contributes to overall high alert → worsens pain.",
+      "Extreme all-or-nothing thinking (one outcome great, one a disaster) activates danger signals.",
+      "The goal: weaken associations of fear/danger/anxiety and reinforce safety/calmness/freedom.",
+      "Embracing positive sensations helps the brain feel safe and learn to trust the body again.",
+      "Foster an overall sense of safety — turn down the volume knob on danger to neutralise pain at the root."
+    ],
+    reframes: [
+      { old: "I need to figure this out or everything will fall apart.", new: "Either way, everything will be fine. The stakes are not as high as they feel." },
+      { old: "I can't stand not knowing what will happen.", new: "Uncertainty is uncomfortable but not dangerous. I can sit with it." },
+      { old: "I feel trapped by my symptoms.", new: "I can allow myself avoidance options — knowing I could use them helps me feel calm even if I don't." }
+    ],
+    strategies: ["Reduce high-alert triggers in daily life", "Challenge all-or-nothing thinking", "Build tolerance for uncertainty", "Create moments of genuine safety and calm each day", "Embrace joyful and positive sensations actively"],
+    prompts: [
+      "What situations put you on high alert most often? How does your body feel in those moments?",
+      "What does a sense of safety feel like in your body? When do you experience it?"
+    ]
+  },
+  {
+    title: "Joy, Safety & Healing",
+    subtitle: "When you're enjoying the moment, you deprive pain of its fuel: fear. Joy is medicine.",
+    concepts: [
+      "When we enjoy the moment, we remove fear — the only fuel source for neuroplastic pain.",
+      "Symptoms often decrease or disappear during genuinely joyful situations (e.g. holidays).",
+      "Embracing positive sensations helps the brain feel safe and rebuilds trust in the body.",
+      "We need to teach the brain that we are safe: physically, emotionally, mentally, and spiritually.",
+      "Safety — not willpower — is what neutralises neuroplastic pain at its root."
+    ],
+    reframes: [
+      { old: "I can't enjoy things while I'm in pain.", new: "Joy removes fear — the fuel of pain. Choosing enjoyment is part of healing." },
+      { old: "Fun or holidays only temporarily mask my pain.", new: "If pain decreases on holiday, that's evidence it's neuroplastic — my brain, not my body, is the source." }
+    ],
+    strategies: ["Actively schedule joyful activities", "Notice when pain decreases during enjoyment — use it as evidence", "Build daily micro-moments of safety and pleasure", "Treat joy as direct medicine for the nervous system"],
+    prompts: [
+      "When does your pain decrease or disappear? What are you doing or feeling in those moments?",
+      "What would it look like to prioritise joy as a genuine part of your recovery — not a distraction from it?"
+    ]
+  },
+  {
+    title: "Is Your Pain Neuroplastic?",
+    subtitle: "These are signs that pain may be driven by the brain's learned danger response, not structural damage.",
+    concepts: [],
+    checklist: [
+      "Symptoms began during a period of stress",
+      "Symptoms began without injury",
+      "Symptoms have lasted longer than the normal healing timeframe",
+      "Symptoms are inconsistent — they vary unexpectedly",
+      "Symptoms sometimes decrease or disappear during joyful/engaging situations",
+      "You have a large number of symptoms across different areas",
+      "Symptoms spread or move to different locations",
+      "Symptoms are triggered by stress — or even thinking about stress",
+      "Symptoms increase when someone asks about them or you think about them",
+      "Triggers have nothing to do with the body (conditioned response)",
+      "Symptoms are symmetrical on both sides of the body",
+      "Delayed pain — symptoms appear after activity, not during",
+      "Childhood adversity — feeling unsafe growing up can predispose to chronic pain",
+      "Personality traits: perfectionism, people-pleasing, conscientiousness, anxiousness",
+      "No clear physical diagnosis despite extensive testing"
+    ],
+    reframes: [
+      { old: "My pain is structural — the tests just haven't found it yet.", new: "Multiple neuroplastic signs suggest the brain, not the body, is the source. This is good news — it can be unlearned." },
+      { old: "If I can't find the cause, the pain isn't real.", new: "Neuroplastic pain is completely real. The cause is the brain's learned danger response, not tissue damage." }
+    ],
+    strategies: ["Use this checklist as evidence — not diagnosis", "Accept perceived danger as the cause and stop returning to doubt", "Doubt creates fear, which keeps the brain perceiving danger", "Share this list with your healthcare provider"],
+    prompts: [
+      "How many of these signs apply to you? What feelings come up when you see them?",
+      "If you accepted that your pain is neuroplastic — what would that change about how you approach recovery?"
+    ]
+  },
+  {
+    title: "Relapse Stages",
+    subtitle: "Relapses follow a predictable pattern. Knowing the stages helps you move through them instead of getting stuck.",
+    concepts: [
+      "Stage 1 — Panic: Pain returns and the brain interprets it as danger, triggering fear and desperation.",
+      "Stage 2 — Forcing It: You try somatic tracking but with desperation and pressure instead of self-compassion. This backfires because pressure = danger signal.",
+      "Stage 3 — It Works: You ease up, bring back self-compassion and outcome independence, and the brain learns again that the sensations are safe.",
+      "Relapses are a normal and expected part of recovery — not a sign of failure.",
+      "The relapse itself is not the problem. Getting stuck in Stage 1 or 2 is."
+    ],
+    reframes: [
+      { old: "The pain is back — I'm back to square one.", new: "This is Stage 1. Panic is normal. I know what comes next." },
+      { old: "I have to do somatic tracking harder to fix this.", new: "Forcing it is Stage 2 — pressure is a danger signal. I need self-compassion, not effort." },
+      { old: "This approach isn't working for me.", new: "I may be in Stage 2 — trying too hard. Ease up, and Stage 3 follows." }
+    ],
+    strategies: ["Name the stage you're in", "In Stage 1: don't catastrophise — this is expected", "In Stage 2: drop the pressure, return to self-compassion and outcome independence", "Remember: relapses are opportunities for corrective experiences", "Be kind to yourself throughout"],
+    prompts: [
+      "Think of a recent flare. Which stage did you get stuck in — panic, forcing it, or did you move through?",
+      "What does 'self-compassion during a relapse' actually look like for you in practice?"
+    ]
+  },
+  {
+    title: "Doubt & Belief",
+    subtitle: "Doubt keeps the brain in danger mode. Accepting the neuroplastic explanation — even imperfectly — is part of healing.",
+    concepts: [
+      "When the brain believes the body is damaged, it responds with pain.",
+      "When you embrace the belief that your body is fine and the brain is making a mistake — the fear goes away.",
+      "Doubt creates fear, and fear keeps the brain perceiving danger.",
+      "Accept perceived danger as the only cause of your symptoms — and do not go back to doubt.",
+      "You don't have to be certain — but moving toward belief in safety is itself therapeutic."
+    ],
+    reframes: [
+      { old: "What if I'm wrong and something is really damaged?", new: "Doubt is fear in disguise. Returning to doubt reactivates the danger signal and the pain." },
+      { old: "I need a diagnosis before I can accept this approach.", new: "Believing my body is safe — even before I feel it — is the starting point for rewiring." }
+    ],
+    strategies: ["Practise returning to the belief: my body is fine", "Notice when doubt creeps in — name it as fear", "Don't go searching for new structural explanations", "Reinforce: this is a false alarm, not damage"],
+    prompts: [
+      "What doubts do you still have about whether your pain is neuroplastic? Where do those doubts come from?",
+      "What would help you build more trust in the belief that your body is safe?"
+    ]
+  },
+  {
+    title: "Research Evidence",
+    subtitle: "Science shows the brain can generate completely real pain from perceived — not physical — threat.",
+    concepts: [],
+    evidence: [
+      "Brain scans of patients with hypnotically induced pain show the same activity patterns as physically caused pain.",
+      "A construction worker experienced severe pain from a nail through his boot — the nail had not gone through his foot.",
+      "Participants hooked up to a fake shock generator experienced real pain with no physical cause.",
+      "Subjects receiving identical heat pulses reported much more pain when viewing frightening images vs. neutral ones.",
+      "Some subjects experienced pain even when the heat probe was completely off — fear from the images was enough.",
+      "People with chronic pain showed greater brain activity in response to an unpleasant sound compared to pain-free controls — their brains were more sensitised to all threat signals."
+    ],
+    reframes: [
+      { old: "If the pain is real, there must be a physical cause.", new: "Science confirms: the brain produces completely real pain from perceived danger alone — no physical damage needed." }
+    ],
+    strategies: ["Use research evidence to challenge structural beliefs", "When doubting: recall these studies as proof that brains generate real pain from perception", "Share with others who dismiss neuroplastic pain as 'not real'"],
+    prompts: [
+      "Which of these studies most surprises you? What does it suggest about your own experience?",
+      "How does knowing the science change — or not change — how you relate to your pain?"
+    ]
+  }
+];
+
+let current = 0;
+const accents = ['accent-0','accent-1','accent-2','accent-3','accent-4','accent-5','accent-6','accent-7','accent-8'];
+
+function render() {
+  const t = topics[current];
+  document.getElementById('nav').innerHTML = topics.map((tp, i) =>
+    `<button class="nav-btn ${i===current?'active':''}" onclick="go(${i})">${tp.title}</button>`
+  ).join('');
+
+  let bodyHTML = '';
+
+  if (t.concepts && t.concepts.length) {
+    bodyHTML += `<div class="section sec-concept">
+      <div class="section-title">📚 Key Concepts</div>
+      <ul>${t.concepts.map(c=>`<li>${c}</li>`).join('')}</ul>
+    </div>`;
+  }
+
+  if (t.checklist) {
+    bodyHTML += `<div class="section sec-concept">
+      <div class="section-title">✅ Signs Your Pain May Be Neuroplastic</div>
+      <ul class="checklist">${t.checklist.map(c=>`<li>${c}</li>`).join('')}</ul>
+    </div>`;
+  }
+
+  if (t.evidence) {
+    bodyHTML += `<div class="section sec-evidence">
+      <div class="section-title">🔬 Research Evidence</div>
+      ${t.evidence.map(e=>`<div class="evidence-item">${e}</div>`).join('')}
+    </div>`;
+  }
+
+  if (t.reframes && t.reframes.length) {
+    bodyHTML += `<div class="section sec-reframe">
+      <div class="section-title">🔄 Reframes & Helpful Phrases</div>
+      ${t.reframes.map(r=>`<div class="reframe-item"><div class="old">${r.old}</div><div class="new">→ ${r.new}</div></div>`).join('')}
+    </div>`;
+  }
+
+  if (t.phrases && t.phrases.length) {
+    bodyHTML += `<div class="section sec-reframe">
+      <div class="section-title">💬 Self-Talk Phrases</div>
+      ${t.phrases.map(p=>`<div class="reframe-item"><div class="new">→ ${p}</div></div>`).join('')}
+    </div>`;
+  }
+
+  if (t.strategies && t.strategies.length) {
+    bodyHTML += `<div class="section sec-strategy">
+      <div class="section-title">🛠 Practical Strategies</div>
+      ${t.strategies.map(s=>`<span class="strategy-chip">${s}</span>`).join('')}
+    </div>`;
+  }
+
+  if (t.prompts && t.prompts.length) {
+    bodyHTML += `<div class="section sec-writing">
+      <div class="section-title">✏️ Reflection Prompts</div>
+      ${t.prompts.map(p=>`<div class="prompt">${p}</div>`).join('')}
+    </div>`;
+  }
+
+  document.getElementById('card').className = `card ${accents[current % accents.length]}`;
+  document.getElementById('card').innerHTML = `
+    <div class="card-header">
+      <div class="topic-label">Topic ${current+1} of ${topics.length}</div>
+      <div class="card-title">${t.title}</div>
+      <div class="card-subtitle">${t.subtitle}</div>
+    </div>
+    <div class="card-body">${bodyHTML}</div>
+    <div class="card-footer">
+      <button class="arrow-btn" onclick="go(${current-1})" ${current===0?'disabled':''}>←</button>
+      <span class="counter">${current+1} / ${topics.length}</span>
+      <button class="arrow-btn" onclick="go(${current+1})" ${current===topics.length-1?'disabled':''}>→</button>
+    </div>
+  `;
+}
+
+function go(i) {
+  if (i < 0 || i >= topics.length) return;
+  current = i;
+  render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+render();
+</script>
+</body>
+</html>
